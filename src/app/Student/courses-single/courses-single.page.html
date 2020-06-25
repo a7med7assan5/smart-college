@@ -1,54 +1,79 @@
 <ion-header>
-    <ion-navbar>
-        <ion-title>
-            course-single
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="secondary">
+            <ion-button [routerLink]="['/home']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title *ngIf='coursedata'>
+            {{coursedata.courseName}}
         </ion-title>
-    </ion-navbar>
+    </ion-toolbar>
 </ion-header>
-<ion-content padding id="course-single">
-    <ion-list id="course-single-info">
-        <ion-item id="course-single-info-courseCode">
-            <ion-label>
-                <p>Course Code</p>
-                <h2>CS125</h2>
-            </ion-label>
-        </ion-item>
-        <ion-item id="course-single-info-department">
-            <ion-label>
-                <p>Department</p>
-                <h2>General</h2>
-            </ion-label>
-        </ion-item>
-        <ion-item id="course-single-info-academicLevel">
-            <ion-label>
-                <p>Academic Level</p>
-                <h2>3</h2>
-            </ion-label>
-        </ion-item>
-        <ion-item id="course-single-info-creditHours">
-            <ion-label>
-                <p>Credit Hours</p>
-                <h2>3</h2>
-            </ion-label>
-        </ion-item>
-        <ion-item id="course-single-info-professor">
-            <ion-label>
-                <p>Professor</p>
-                <h2>Marwa Salah</h2>
-            </ion-label>
-        </ion-item>
-    </ion-list>
-    <div class="spacer" id="course-single-functions"></div>
-    <ion-button id="course-single-attendance" outline color="dark" block icon-right>
-        Attendance
-        <ion-icon name="arrow-forward"></ion-icon>
-    </ion-button>
-    <ion-button id="course-single-assignments" outline color="dark" block icon-right>
-        Assignments
-        <ion-icon name="arrow-forward"></ion-icon>
-    </ion-button>
-    <ion-button id="course-single-grades" outline color="dark" block icon-right>
-        Grades
-        <ion-icon name="arrow-forward"></ion-icon>
-    </ion-button>
+<ion-content padding id="courses-single">
+    <div *ngIf='coursedata'>
+        <ion-list id="courses-single-info">
+            <ion-item id="courses-single-courseCode">
+                <ion-label>
+                    <h1>
+                        {{coursedata.courseCode}}
+                    </h1>
+                </ion-label>
+            </ion-item>
+            <ion-item id="courses-single-info-name">
+                <ion-label>
+                    <p>{{ 'NAME' | translate }}</p>
+                    <h2>{{coursedata.courseName}}</h2>
+                </ion-label>
+            </ion-item>
+            <ion-item id="courses-single-info-department">
+                <ion-label>
+                    <p>{{ 'DEPARTMENT' | translate }}</p>
+                    <h2>{{coursedata.courseDepartment}}</h2>
+                </ion-label>
+            </ion-item>
+            <ion-item id="courses-single-info-creditHours">
+                <ion-label>
+                    <p>{{ 'CREDITHOURS' | translate }}</p>
+                    <h2>{{coursedata.creaditHours}}</h2>
+                </ion-label>
+            </ion-item>
+        </ion-list>
+    </div>
+    <ion-item id="courses-single-info-semester" *ngIf="semesterdata">
+        <ion-label>
+            <p>{{ 'SEMESTER' | translate }}</p>
+            <h2>{{semesterdata.semesters[0].semester_time}}</h2>
+        </ion-label>
+    </ion-item>
+    <!-- <ion-item id="courses-single-info-status">
+                <ion-label>
+                    <p>{{ 'STATUS' | translate }}</p>
+                    <ion-button id="courses-single-info-statusBtn" color="{{this.colorr}}" value="View" class="ionBtn" style="width: 150px;" (click)="activeAlertConfirm()">
+                        <ion-icon name="checkmark-circle-outline" slot="start" position="fixed"></ion-icon>
+                        {{coursedata.status}}
+                    </ion-button>
+                </ion-label>
+            </ion-item> -->
+    <div *ngIf="coursesdata">
+        <ion-button id="courses-single-addCourseSemesterBtn" type="submit" expand="block" class="ionBtn ionBtn-success" value="Attendance" *ngIf="isTeacherOrStudent" [routerLink]="['/course/semester/attendance']">
+            <ion-icon name="arrow-forward" slot="end"></ion-icon>
+            {{ 'ATTENDANCE' | translate }}
+        </ion-button>
+        <ion-button id="courses-single-addCourseSemesterBtn" type="submit" expand="block" class="ionBtn ionBtn-success" value="Assignments" *ngIf="isTeacherOrStudent" [routerLink]="['/course/semester/assignments']">
+            <ion-icon name="arrow-forward" slot="end"></ion-icon>
+            {{ 'ASSIGNMENTS' | translate }}
+        </ion-button>
+        <ion-button id="courses-single-addCourseSemesterBtn" type="submit" expand="block" class="ionBtn ionBtn-success" value="Grades" *ngIf="isStudent" [routerLink]="['/course/semester/mygrades']">
+            <ion-icon name="arrow-forward" slot="end"></ion-icon>
+            {{ 'GRADES' | translate }}
+        </ion-button>
+        <ion-button id="courses-single-addCourseSemesterBtn" type="submit" expand="block" class="ionBtn ionBtn-success" value="Grades" *ngIf="isTeacher" [routerLink]="['/course/semester/students/grades']">
+            <ion-icon name="arrow-forward" slot="end"></ion-icon>
+            {{ 'GRADES' | translate }}
+        </ion-button>
+    </div>
 </ion-content>

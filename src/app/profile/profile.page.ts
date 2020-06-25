@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User, Role } from '../_models';
 import { AuthService } from '../services/auth.service';
 import { AdminservicesService } from '../services/adminservices.service';
+import { TranslateConfigService } from '../services/translate-config.service';
 
 declare var $: any;
 @Component({
@@ -15,16 +16,22 @@ export class profilePage implements OnInit {
   userdata: any;
   nohours: string;
   usercredithours: any;
-  constructor(private authenticationService: AuthService,
+  selectedLanguage:string;
+  constructor(private authenticationService: AuthService, private translateConfigService: TranslateConfigService,
     private adminservices: AdminservicesService
   ) {
     this.currentUser = this.authenticationService.currentUserValue;
+    this.selectedLanguage = this.translateConfigService.getDefaultLanguage();
   }
   get isStudent() {
     return this.currentUser && this.currentUser.role === Role.Student;
   }
   get isTeacher() {
     return this.currentUser && this.currentUser.role === Role.Teacher;
+  }
+
+  languageChanged(){
+    this.translateConfigService.setLanguage(this.selectedLanguage);
   }
 
   ngOnInit(): void {

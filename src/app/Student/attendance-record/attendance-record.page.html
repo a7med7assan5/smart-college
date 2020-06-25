@@ -1,65 +1,34 @@
 <ion-header>
-    <ion-navbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="secondary">
+            <ion-button [routerLink]="['/profile']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
         <ion-title>
-            Attendance Record
+            {{ 'ATTENDANCERECORD' | uppercase | translate}}
         </ion-title>
-    </ion-navbar>
+    </ion-toolbar>
 </ion-header>
 <ion-content padding id="attendance-record">
-    <div id="attendanceRecord-noRecord" class="show-list-numbers-and-dots">
+    <!-- law mafesh weeks lsa -->
+    <ion-item id="attendanceRecord-noRecord" class="show-list-numbers-and-dots">
         <p>
             No attendance record yet!
         </p>
-    </div>
+    </ion-item>
     <ion-list id="attendanceRecord-weeks">
-        <ion-item color="none" id="attendanceRecord-weeks-week1">
-            Week 1
-            <ion-icon name="checkmark-circle" item-right></ion-icon>
+        <ion-item color="none">
+            <ion-label>{{ 'WEEK' | translate}} {{attendancedata.lectureNumber}}</ion-label>
+            <ion-icon name="checkmark-circle" color="success" slot="end"></ion-icon>
+            <!-- {{attendancedata.status}} law 7ader lmfrod color ykon success wl name ykon checkmark-circle-->
         </ion-item>
-        <ion-item color="none" id="attendanceRecord-weeks-week2">
+        <ion-item color="none">
             Week 2
-            <ion-icon name="checkmark-circle-outline" item-right></ion-icon>
-        </ion-item>
-        <ion-item color="none" id="attendanceRecord-weeks-week3">
-            Week 3
-            <ion-icon name="close-circle" item-right></ion-icon>
-        </ion-item>
-        <ion-item color="none" id="attendanceRecord-weeks-week4">
-            Week 4
-            <ion-icon name="close" item-right></ion-icon>
-        </ion-item>
-        <ion-item color="none" id="attendanceRecord-weeks-week5">
-            Week 5
-            <ion-icon name="checkmark" item-right></ion-icon>
-        </ion-item>
-        <ion-item color="none" id="attendanceRecord-weeks-week6">
-            Week 6
-            <ion-icon name="checkmark" item-right></ion-icon>
-        </ion-item>
-        <ion-item color="none" id="attendanceRecord-weeks-week7">
-            Week 7
-            <ion-icon name="checkmark" item-right></ion-icon>
-        </ion-item>
-        <ion-item color="none" id="attendanceRecord-weeks-week8">
-            Week 8
-            <ion-icon name="checkmark" item-right></ion-icon>
-        </ion-item>
-        <ion-item color="none" id="attendanceRecord-weeks-week9">
-            Week 9
-            <ion-icon name="checkmark" item-right></ion-icon>
-        </ion-item>
-        <ion-item color="none" id="attendanceRecord-weeks-week10">
-            Week 10
-            <ion-icon name="checkmark" item-right></ion-icon>
-        </ion-item>
-        <ion-item color="none" id="attendanceRecord-weeks-week11">
-            Week 11
-            <ion-icon name="checkmark" item-right></ion-icon>
-        </ion-item>
-        <ion-item color="none" id="attendanceRecord-weeks-week12">
-            Week 12
-            <ion-icon name="checkmark" item-right></ion-icon>
+            <ion-icon name="close-circle" color="danger" slot="end"></ion-icon>
         </ion-item>
     </ion-list>
-    <div class="spacer"></div>
 </ion-content>

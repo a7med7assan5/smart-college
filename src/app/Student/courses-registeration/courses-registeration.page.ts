@@ -1,11 +1,15 @@
 import { Component, OnInit } from '@angular/core';
 import { User, Semester } from 'src/app/_models';
+import { Course } from 'src/app/_models/course';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { TeacherServiceService } from 'src/app/services/teacher-service.service';
 import { CourseService } from 'src/app/services/course.service';
 import { SemesterserviceService } from 'src/app/services/semesterservice.service';
-import { Course } from 'src/app/_models/course';
+import { AlertService } from 'src/app/services/alert.service';
+import { TranslateConfigService } from 'src/app/services/translate-config.service';
+
 
 @Component({
   selector: 'app-courses-registeration',
@@ -21,45 +25,37 @@ export class coursesRegisterationPage implements OnInit {
   courseCode: string;
   course: any;
   allCourses: any;
-  response: any;
-  error: any;
+  selectedLanguage:string;
+  validations_form: FormGroup;
   constructor(
     private router: Router,
     private authenticationService: AuthService,
     private teacherservices: TeacherServiceService,
     private _Activatedroute: ActivatedRoute,
     private courseService: CourseService,
-    private semesterserviceService: SemesterserviceService
+    private semesterserviceService: SemesterserviceService,
+    private formBuilder: FormBuilder,
+    private alertservice: AlertService,
+    private translateConfigService: TranslateConfigService
 
   ) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     this.currentUser = this.authenticationService.currentUserValue;
     this.currentCourse = this.courseService.currentCourseValue;
     this.currentCourseSemester = this.semesterserviceService.currentCourseSemesterValue;
+    this.selectedLanguage = this.translateConfigService.getDefaultLanguage();
   }
-  selectChangeHandler(event: any) {
+  onSelectChange(event: any) {
     //update the ui
     this.course = event.target.value;
   }
 
   addUserCourse() {
 
-    let response = document.getElementById('response');
-    let error = document.getElementById('error');
     this.teacherservices.addUserCourse(this.currentUser._id, this.course).subscribe(res => {
-      this.response = res;
-      if (error.classList.contains('d-block')) {
-        error.classList.replace('d-block', 'd-none');
-      }
-      response.classList.replace('d-none', 'd-block');
-      response.innerHTML = this.response.msg;
+      this.alertservice.showAlert("&#xE876;", "success", res.msg);
     }, err => {
-      this.error = err.error;
-      if (response.classList.contains('d-block')) {
-        response.classList.replace('d-block', 'd-none');
-      }
-      error.classList.replace('d-none', 'd-block');
-      error.innerHTML = this.error.msg;
+      this.alertservice.showAlert("&#xE5CD;", "error", err.error.msg);
     }
     );
   }
@@ -68,21 +64,16 @@ export class coursesRegisterationPage implements OnInit {
     let response = document.getElementById('response');
     let error = document.getElementById('error');
     this.teacherservices.deleteUserCourse(this.currentUser._id, this.course).subscribe(res => {
-      this.response = res;
-      if (error.classList.contains('d-block')) {
-        error.classList.replace('d-block', 'd-none');
-      }
-      response.classList.replace('d-none', 'd-block');
-      response.innerHTML = this.response.msg;
+      this.alertservice.showAlert("&#xE876;", "success", res.msg);
     }, err => {
-      this.error = err.error;
-      if (response.classList.contains('d-block')) {
-        response.classList.replace('d-block', 'd-none');
-      }
-      error.classList.replace('d-none', 'd-block');
-      error.innerHTML = this.error.msg;
+      this.alertservice.showAlert("&#xE5CD;", "error", err.error.msg);
     }
     );
+  }
+
+  
+  languageChanged(){
+    this.translateConfigService.setLanguage(this.selectedLanguage);
   }
 
   ngOnInit(): void {
@@ -92,6 +83,17 @@ export class coursesRegisterationPage implements OnInit {
       this.allCourses = err
     }
     );
-  }
-}
 
+    this.validations_form = this.formBuilder.group({
+      courses: new FormControl('', Validators.required),
+    });
+  
+  
+  }
+  
+  validation_messages = {
+  
+  };
+  
+  }
+  

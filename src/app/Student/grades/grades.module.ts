@@ -1,11 +1,12 @@
 import { IonicModule } from '@ionic/angular';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { gradesPage } from './grades.page';
 
 import { gradesPageRoutingModule } from './grades-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 @NgModule({
   imports: [
@@ -13,8 +14,10 @@ import { TranslateModule } from '@ngx-translate/core';
     CommonModule,
     FormsModule,
     gradesPageRoutingModule,
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
+    NgxDatatableModule
   ],
-  declarations: [gradesPage]
+  declarations: [gradesPage],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class gradesPageModule {}

@@ -88,5 +88,19 @@
     "YEAR": "Year",
 
 
+    "ATTENDANCE": "Attendance",
+    "ATTENDANCERECORD": "Attendance Record",
+    "WEEK": "Week",
+    "TIME": "Time",
+    "DATE": "Date",
+    "LOCATION": "Location",
+    "ATTENDME": "Attend Me",
+    "COURSESTATUS": "Course Status",
+    "ASSIGNMENTS": "",
+    "": "",
+    "": "",
+    "": "",
+
+
     "": ""
 }

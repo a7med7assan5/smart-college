@@ -169,6 +169,12 @@ const routes: Routes = [
     data: { roles: [Role.Teacher, Role.Student] }
   },
   {
+    path: 'courses/courses-single',
+    loadChildren: () => import('./Student/courses-single/courses-single.module').then(m => m.coursesSinglePageModule),
+    canActivate: [AuthGuard],
+    data: { roles: [Role.Teacher, Role.Student] }
+  },
+  {
     path: 'course/semester/home',
     loadChildren: () => import('./Student/courses-single/courses-single.module').then(m => m.coursesSinglePageModule),
     canActivate: [AuthGuard],
@@ -193,12 +199,11 @@ const routes: Routes = [
     data: { roles: [Role.Student] }
   },
   {
-    path: 'course/semester/attendance-sheet',
-    loadChildren: () => import('./Student/grades/grades.module').then(m => m.gradesPageModule),
+    path: 'course/registeration',
+    loadChildren: () => import('./Student/courses-registeration/courses-registeration.module').then(m => m.coursesRegisterationPageModule),
     canActivate: [AuthGuard],
     data: { roles: [Role.Student] }
   },
-
   // Teacher
   {
     path: 'course/semester/attendance',

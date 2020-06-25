@@ -1,29 +1,65 @@
 <ion-header>
-    <ion-navbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="secondary">
+            <ion-button [routerLink]="['/profile']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
         <ion-title>
-            Courses
+            {{ 'COURSES' | uppercase | translate}}
         </ion-title>
-    </ion-navbar>
+    </ion-toolbar>
 </ion-header>
-<ion-content padding id="courses">
-    <ion-card id="courses-card">
+<ion-content padding id="student-courses">
+    <ion-list id="Usercourses-info">
+        <ion-item id="Usercourses-select">
+            <ion-label>
+                {{ 'COURSES' | translate }}
+            </ion-label>
+            <ion-select [(ngModel)]="courseType" [ngModelOptions]="{standalone: true}" slot="end" [interfaceOptions]="customPopoverOptions" interface="popover" id='role' (ionChange)="onSelectChange($event)">
+                <ion-select-option value="">{{ 'ALLCOURSES' | translate }}</ion-select-option>
+                <ion-select-option value="new">{{ 'NEW' | translate }}</ion-select-option>
+                <ion-select-option value="pass">{{ 'PASS' | translate }}</ion-select-option>
+                <ion-select-option value="fail">{{ 'FAIL' | translate }}</ion-select-option>
+                <ion-select-option value="postponed">{{ 'POSTPONED' | translate }}</ion-select-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+    <ion-card id="student-courses-card" *ngFor='let course of arr' (focus)="closCourse();closSemester()">
         <ion-list>
-            <ion-item color="none" id="courses-list-item28">
-                Database Systems 1
+            <ion-item color="none" id="student-courses-name">
+                {{course.courseName}}
             </ion-item>
-            <ion-item id="courses-list-item1">
-                <div id="courses-markdown" class="show-list-numbers-and-dots">
+            <ion-item id="student-courses-courseCode">
+                <div id="student-courses-markdown" class="show-list-numbers-and-dots">
                     <p>
-                        Course Code:
-                        <strong>
-                IS211
-              </strong>
+                        {{ 'COURSECODE' | translate}}:
+                        <strong> {{course.courseCode}} </strong>
                     </p>
                 </div>
             </ion-item>
-            <ion-item color="positive" id="courses-list-open">
+            <ion-item id="student-courses-courseStatus">
+                <div id="student-courses-markdown" class="show-list-numbers-and-dots">
+                    <p>
+                        {{ 'COURSESTATUS' | translate}}:
+                        <strong> {{course.status}} </strong>
+                    </p>
+                </div>
+            </ion-item>
+            <ion-item id="student-courses-semesterStatus">
+                <div id="student-courses-markdown" class="show-list-numbers-and-dots">
+                    <p>
+                        {{ 'SEMESTERSTATUS' | translate}}:
+                        <strong> {{course.semesters[0].semester_status}} </strong>
+                    </p>
+                </div>
+            </ion-item>
+            <ion-item color="positive" id="student-courses-list-open" (focus)="openCourse(course.courseCode);openSemester(course.courseCode,course.semester_time)" [routerLink]="['/course/semester/home']">
                 <ion-icon name="open" item-left></ion-icon>
-                Open
+                {{ 'OPEN' | translate}}
             </ion-item>
         </ion-list>
     </ion-card>

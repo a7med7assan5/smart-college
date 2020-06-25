@@ -51,7 +51,7 @@ export class addCourseGradePage implements OnInit {
   addCourseGrade(type: HTMLInputElement, grade: HTMLInputElement) {
     this.gradetype = this.type + " " + this.grade;
     this.adminservices.addCourseSemesterGrade(this.currentCourse.courseCode, this.currentCourseSemester.semesters[0].semester_time, this.gradetype, this.grade).subscribe(res => {
-      this.alertservice.showAlert(res.icon, res.style, res.msg);
+      this.alertservice.showAlert("&#xE876;", "success", res.msg);
       this.gradestype = null;
       grade.value = "";
     }, err => {

@@ -48,11 +48,8 @@ export class addUserCoursePage implements OnInit {
   }
 
   addUserCourse() {
-
-    let response = document.getElementById('response');
-    let error = document.getElementById('error');
     this.adminservices.addUserCourse(this.currentClickedUser._id, this.course).subscribe(res => {
-      this.alertservice.showAlert(res.icon, res.style, res.msg);
+      this.alertservice.showAlert("&#xE876;", "success", res.msg);
       this.courses = null;
     }, err => {
       this.alertservice.showAlert("&#xE5CD;", "error", err.error.msg);
@@ -60,11 +57,8 @@ export class addUserCoursePage implements OnInit {
     );
   }
   deleteUserCourse() {
-
-    let response = document.getElementById('response');
-    let error = document.getElementById('error');
     this.adminservices.deleteUserCourse(this.currentClickedUser._id, this.course).subscribe(res => {
-      this.alertservice.showAlert(res.icon, res.style, res.msg);
+      this.alertservice.showAlert("&#xE876;", "success", res.msg);
     }, err => {
       this.alertservice.showAlert("&#xE5CD;", "error", err.error.msg);
     }
