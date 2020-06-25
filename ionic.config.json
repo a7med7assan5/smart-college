@@ -1,0 +1,7 @@
+{
+  "name": "smart-college",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

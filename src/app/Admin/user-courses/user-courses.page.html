@@ -1,0 +1,82 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="secondary">
+            <ion-button [routerLink]="['/profile']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            {{ 'USERCOURSES' | uppercase | translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding id="user-courses">
+    <ion-list id="Usercourses-info">
+        <ion-item id="Usercourses-select">
+            <ion-label>
+                {{ 'COURSES' | translate }}
+            </ion-label>
+            <ion-select [(ngModel)]="courseType" [ngModelOptions]="{standalone: true}" slot="end" [interfaceOptions]="customPopoverOptions" interface="popover" id='role' (ionChange)="onSelectChange($event)">
+                <ion-select-option value="">{{ 'ALLCOURSES' | translate }}</ion-select-option>
+                <ion-select-option value="new">{{ 'NEW' | translate }}</ion-select-option>
+                <ion-select-option value="pass">{{ 'PASS' | translate }}</ion-select-option>
+                <ion-select-option value="fail">{{ 'FAIL' | translate }}</ion-select-option>
+                <ion-select-option value="postponed">{{ 'POSTPONED' | translate }}</ion-select-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+    <div class="ion-padding">
+        <ngx-datatable class="material" [limit]="8" [rows]="rows" [rowHeight]="50" [columns]="columns" [columnMode]="'force'" [sortType]="'multi'" [sorts]="[{prop: 'courseCode', dir: 'desc'}]" [headerHeight]="50" [footerHeight]="50">
+            <ngx-datatable-column name="courseCode">
+                <ng-template ngx-datatable-header-template>
+                    <span>{{ 'COURSECODE' | translate }}</span>
+                </ng-template>
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <a (click)="openCourse(row.courseCode)">{{row.courseCode}}</a>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="courseName">
+                <ng-template ngx-datatable-header-template>
+                    <span>{{ 'NAME' | translate }}</span>
+                </ng-template>
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.courseName}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="status">
+                <ng-template ngx-datatable-header-template>
+                    <span>{{ 'STATUS' | translate }}</span>
+                </ng-template>
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.status}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="semester_time">
+                <ng-template ngx-datatable-header-template>
+                    <span>{{ 'SEMESTER' | translate }}</span>
+                </ng-template>
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.semester_time}} </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="semester_status">
+                <ng-template ngx-datatable-header-template>
+                    <span>{{ 'SEMESTERSTATUS' | translate }}</span>
+                </ng-template>
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.semesters[0].semester_status}} </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>
+    </div>
+    <ion-button id="Usercourses-openCourseBtn" type="submit" expand="block" [routerLink]="['/user/course/info']" (focus)="openCourse(course.courseCode);openSemester(course.courseCode,course.semester_time)" class="ionBtn ionBtn-success" value="Open">
+        <ion-icon name="create-outline" slot="start"></ion-icon>
+        {{ 'OPEN' | translate }}
+    </ion-button>
+
+    <ion-button id="Usercourses-addCourseBtn" type="submit" expand="block" routerLink='/user/add-delete-course' class="ionBtn ionBtn-danger" value="AddDeleteCourse">
+        <ion-icon name="add" slot="start"></ion-icon>
+        {{ 'ADDDROPCOURSE' | translate }}
+    </ion-button>
+</ion-content>

@@ -1,0 +1,52 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="secondary">
+            <ion-button [routerLink]="['/profile']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            {{ 'ADDDROPCOURSE' | uppercase | translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding id="add-user-course">
+    <form id="addUserCourse-form" [formGroup]="validations_form">
+        <ion-list id="addUserCourse-info">
+            <ion-item id="addUserCourse-semester">
+                <ion-label>
+                    {{ 'COURSES' | translate }}
+                </ion-label>
+                <ion-select [(ngModel)]="courses" [ngModelOptions]="{standalone: true}" formControlName="courses" slot="end" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="{{ 'SELECTCOURSE' | translate }}" id='gradeType' (ionChange)="onSelectChange($event)"
+                    #course aria-required="required">
+                    <ion-select-option *ngFor="let course of allCourses" value="{{course.courseCode}}">
+                        {{course.courseName}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>
+        <ion-row>
+            <ion-col size="6">
+                <ion-button id="addUserCourse-addUserCourseBtn" type="submit" expand="block" [disabled]="!validations_form.valid" class="ionBtn ionBtn-success" (click)="addUserCourse()" value="AddCourse">
+                    <ion-icon name="add" slot="start"></ion-icon>
+                    {{ 'ADDCOURSE' | translate }}
+                </ion-button>
+            </ion-col>
+            <ion-col size="6">
+                <ion-button id="addUserCourse-dropUserCourseBtn" type="submit" expand="block" [disabled]="!validations_form.valid" class="ionBtn ionBtn-danger" (click)="deleteUserCourse()" value="DropCourse">
+                    <ion-icon name="trash" slot="start"></ion-icon>
+                    {{ 'DROPCOURSE' | translate }}
+                </ion-button>
+            </ion-col>
+        </ion-row>
+
+        <!-- <div id="responsediv">
+            <div class="alert alert-primary d-none" role="alert" id="response"></div>
+            <div class="alert alert-danger d-none" role="alert" id="error"></div>
+        </div> -->
+
+    </form>
+
+</ion-content>

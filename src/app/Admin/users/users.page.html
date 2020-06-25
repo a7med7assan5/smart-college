@@ -1,0 +1,72 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="secondary">
+            <ion-button [routerLink]="['/profile']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            {{ 'USERS' | uppercase | translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding id="users">
+    <ion-list id="users-info">
+        <ion-item id="users-select">
+            <ion-label>
+                {{ 'USERS' | translate }}
+            </ion-label>
+            <ion-select [(ngModel)]="users" [ngModelOptions]="{standalone: true}" slot="end" [interfaceOptions]="customPopoverOptions" interface="popover" id='role' (ionChange)="onSelectChange($event)">
+                <ion-select-option value="">{{ 'ALLUSERS' | translate }}</ion-select-option>
+                <ion-select-option value="student">{{ 'STUDENT' | translate }}</ion-select-option>
+                <ion-select-option value="teacher">{{ 'PROFESSOR' | translate }}</ion-select-option>
+                <ion-select-option value="admin">{{ 'ADMIN' | translate }}</ion-select-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+    <div class="ion-padding">
+        <ngx-datatable class="material" [limit]="8" [rows]="rows" [rowHeight]="50" [columns]="columns" [columnMode]="'force'" [sortType]="'multi'" [sorts]="[{prop: '_id', dir: 'desc'}]" [headerHeight]="50" [footerHeight]="50">
+            <ngx-datatable-column name="_id">
+                <ng-template ngx-datatable-header-template>
+                    <span>{{ 'ID' | translate }}</span>
+                </ng-template>
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <a (click)="openClickedUser(row._id)">{{row._id}}</a>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="name">
+                <ng-template ngx-datatable-header-template>
+                    <span>{{ 'NAME' | translate }}</span>
+                </ng-template>
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.name}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="email">
+                <ng-template ngx-datatable-header-template>
+                    <span>{{ 'EMAIL' | translate }}</span>
+                </ng-template>
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.email}}
+                </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>
+    </div>
+    <ion-row>
+        <ion-col size="6">
+            <ion-button id="users-addCourseBtn" type="submit" expand="block" routerLink='/user/add-user' class="ionBtn ionBtn-success" value="AddUser">
+                <ion-icon name="add" slot="start"></ion-icon>
+                {{ 'ADDUSER' | translate }}
+            </ion-button>
+        </ion-col>
+        <ion-col size="6">
+            <ion-button id="users-manageCourseBtn" type="submit" expand="block" routerLink='/user/manage-user' class="ionBtn ionBtn-danger" value="ManageUser">
+                <ion-icon name="create-outline" slot="start"></ion-icon>
+                {{ 'MANAGEUSER' | translate }}
+            </ion-button>
+        </ion-col>
+    </ion-row>
+</ion-content>

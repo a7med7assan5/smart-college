@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title class="center">
+            {{ 'LOGIN' | uppercase | translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding id="login">
+    <form id="login-form" [formGroup]="validations_form" (ngSubmit)="loginUser(id,password)">
+        <ion-list id="login-info">
+            <ion-item id="login-id">
+                <ion-label>
+                    {{ 'ID' | translate }}
+                </ion-label>
+            </ion-item>
+            <ion-item id="login-idInput">
+                <ion-input type="number" min="20201800" max="20301800" maxlength="8" placeholder="Enter Your ID" formControlName="id" #id required></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.id">
+                    <div class="error-message" *ngIf="validations_form.get('id').hasError(validation.type) && (validations_form.get('id').dirty || validations_form.get('id').touched)">
+                        <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                    </div>
+                </ng-container>
+            </div>
+            <ion-item id="login-password">
+                <ion-label>
+                    {{ 'PASSWORD' | translate }}
+                </ion-label>
+            </ion-item>
+            <ion-item id="login-passwordInput">
+                <ion-input type="password" formControlName="password" placeholder="Enter Your Password" #password required></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.password">
+                    <div class="error-message" *ngIf="validations_form.get('password').hasError(validation.type) && (validations_form.get('password').dirty || validations_form.get('password').touched)">
+                        <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                    </div>
+                </ng-container>
+            </div>
+        </ion-list>
+        <ion-button id="login-addUserBtn" type="submit" expand="block" [disabled]="!validations_form.valid" class="ionBtn ionBtn-success" value="Login">
+            <ion-icon name="log-in" slot="start"></ion-icon>
+            {{ 'ADDUSER' | translate }}
+        </ion-button>
+    </form>
+</ion-content>

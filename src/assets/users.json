@@ -1,0 +1,15 @@
+{
+    "users": [{
+            "id": "20201882",
+            "name": "Ahmed",
+            "email": "a7med@gmail.com",
+            "courses": ["cs", "ds", "dc"]
+        },
+        {
+            "id": "20201825",
+            "name": "marwan",
+            "email": "marwan@gmail.com",
+            "courses": ["cs", "ds", "dc"]
+        }
+    ]
+}

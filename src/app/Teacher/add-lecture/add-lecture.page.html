@@ -1,0 +1,35 @@
+<ion-header>
+    <ion-navbar>
+        <ion-title>
+            Create New Lecture
+        </ion-title>
+    </ion-navbar>
+</ion-header>
+<ion-content padding id="add-lecture">
+    <form id="addLecture-form">
+        <ion-item id="addLecture-courseCode">
+            <ion-label>
+                Course Code:
+            </ion-label>
+            <ion-input type="text" placeholder=""></ion-input>
+        </ion-item>
+        <div class="spacer"></div>
+        <ion-item id="addLecture-week">
+            <ion-label>
+                Week:
+            </ion-label>
+            <ion-input type="text" placeholder=""></ion-input>
+        </ion-item>
+        <div class="spacer"></div>
+        <ion-item id="addLecture-hall">
+            <ion-label>
+                Hall:
+            </ion-label>
+            <ion-input type="text" placeholder=""></ion-input>
+        </ion-item>
+    </form>
+    <ion-button id="addLecture-createNewLectureBtn" outline color="balanced" block icon-left>
+        <ion-icon name="create"></ion-icon>
+        Create New Lecture
+    </ion-button>
+</ion-content>

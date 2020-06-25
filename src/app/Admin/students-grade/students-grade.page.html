@@ -1,0 +1,69 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="secondary">
+            <ion-button [routerLink]="['/profile']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            {{ 'STUDENTGRADES' | uppercase | translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding id="student-grade">
+    <div class="ion-padding">
+        <ngx-datatable class="material" [limit]="8" [rows]="rows" [rowHeight]="50" [columns]="columns" [columnMode]="'force'" [sortType]="'multi'" [sorts]="[{prop: '_id', dir: 'desc'}]" [headerHeight]="50" [footerHeight]="50">
+            <ngx-datatable-column name="_id" *ngFor="let userdata of usertotalgradestotal;index as i;">
+                <ng-template ngx-datatable-header-template>
+                    <span>{{ 'ID' | translate }}</span>
+                </ng-template>
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <a>{{userdata.row._id}}</a>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="name">
+                <ng-template ngx-datatable-header-template>
+                    <span>{{ 'NAME' | translate }}</span>
+                </ng-template>
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{userdata.row.name}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="{{grades.type}}({{grades.grade}})">
+                <ng-template *ngFor="let grades of coursedata" ngx-datatable-header-template>
+                    <span>{{grades.type}}({{grades.grade}})</span>
+                </ng-template>
+                <ng-template let-row="row" *ngFor="let fdata of things[i]" ngx-datatable-cell-template>
+                    {{fdata.score}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Total({{courseTotalGrades.totalGrades}})">
+                <ng-template *ngIf="courseTotalGrades" ngx-datatable-header-template>
+                    <span>Total({{courseTotalGrades.totalGrades}})</span>
+                </ng-template>
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{userdata.totalGrades.totalGrades}}
+                </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>
+        <div *ngIf="courseSemesterDataCode">
+            <ion-row>
+                <ion-col size="6">
+                    <ion-button id="student-grade-addGRADEBtn" type="submit" expand="block" *ngIf="courseDataCode" [routerLink]="['/course/semester/add-student-grade']" class="ionBtn ionBtn-success" value="AddGrade">
+                        <ion-icon name="add" slot="start"></ion-icon>
+                        {{ 'ADDGRADE' | translate }}
+                    </ion-button>
+                </ion-col>
+                <ion-col size="6">
+                    <ion-button id="courses-manageCourseBtn" type="submit" expand="block" *ngIf="courseDataCode" [routerLink]="['/course/semester/update-student-grade']" class="ionBtn ionBtn-update" value="UpdateGrade">
+                        <ion-icon name="create-outline" slot="start"></ion-icon>
+                        {{ 'UPDATEGRADE' | translate }}
+                    </ion-button>
+                </ion-col>
+            </ion-row>
+        </div>
+    </div>
+</ion-content>

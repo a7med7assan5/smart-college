@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home"></ion-back-button>
+        </ion-buttons>
+        <ion-title>
+            {{ 'PROFILE' | uppercase | translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding id="profile">
+    <div *ngIf="userdata">
+        <h1 id="profile-id">
+            {{userdata._id}}
+        </h1>
+        <img src="../../assets/img/Avatar.png" class="avatar" />
+        <ion-list id="profile-info">
+            <ion-item id="profile-info-name">
+                <ion-label>
+                    <p>{{ 'NAME' | translate}}</p>
+                    <h3>{{userdata.name}}</h3>
+                </ion-label>
+            </ion-item>
+            <ion-item id="profile-info-email">
+                <ion-label>
+                    <p>{{ 'EMAIL' | translate}}</p>
+                    <h3>{{userdata.email}}</h3>
+                </ion-label>
+            </ion-item>
+            <ion-item id="profile-info-creditHours">
+                <ion-label>
+                    <p>{{ 'ROLE' | translate}}</p>
+                    <h3>{{userdata.role}}</h3>
+                </ion-label>
+            </ion-item>
+            <ion-item id="profile-info-courses">
+                <ion-label>
+                    <p>{{ 'COURSES' | translate}}</p>
+                    <ion-button id="profile-info-coursesBtn" value="View" shape="round" class="ionBtn">
+                        <ion-icon name="eye" slot="start"></ion-icon>
+                        {{ 'VIEWCOURSES' | translate}}
+                    </ion-button>
+                </ion-label>
+            </ion-item>
+        </ion-list>
+    </div>
+</ion-content>

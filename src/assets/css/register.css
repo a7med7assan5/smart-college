@@ -1,0 +1,134 @@
+.addUser {
+    background: #f8f9fa;
+    border-top-left-radius: 10% 50%;
+    border-bottom-left-radius: 10% 50%;
+    position: absolute;
+    left: 35%;
+    height: 450px;
+}
+
+@-webkit-keyframes mover {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-20px);
+    }
+}
+
+@keyframes mover {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-20px);
+    }
+}
+
+.addUser-form {
+    padding: 10%;
+    margin-top: 10%;
+}
+
+.btn-addUser {
+    float: right;
+    margin-top: 10%;
+    border: none;
+    border-radius: 1.5rem;
+    background: linear-gradient(-45deg, #1391a5, #274685);
+    color: #fff;
+    box-shadow: 0 10px 30px 0 rgba(0, 0, 0, 0.15);
+    height: 40px;
+    width: 120px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px 0px!important;
+}
+
+.btn-addUser:hover {
+    color: white;
+    background: #064e81;
+}
+
+.btnRegister {
+    width: 120px;
+    padding: 2% !important;
+}
+
+.addUser .nav-tabs {
+    margin-top: 3%;
+    border: none;
+    background: linear-gradient(-45deg, #1391a5, #274685);
+    border-radius: 1.5rem;
+    width: 28%;
+    float: right;
+}
+
+.nav-tabs .nav-link {
+    padding: 2%;
+    height: 34px;
+    font-weight: 600;
+    color: #fff;
+    border-top-right-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+}
+
+.addUser .nav-tabs .nav-link:hover {
+    border: none;
+}
+
+.addUser .nav-tabs .nav-link.active {
+    width: 100px;
+    color: #1391a5;
+    border: 2px solid #1391a5;
+    border-top-left-radius: 1.5rem;
+    border-bottom-left-radius: 1.5rem;
+}
+
+.addUser-heading {
+    text-align: center;
+    margin-top: 8%;
+    margin-bottom: -15%;
+    color: #495057;
+}
+
+.maxl {
+    color: #212529;
+}
+
+.avatar-pic {
+    width: 150px;
+    margin-bottom: -10px;
+}
+
+.file-field input[type="file"] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+    opacity: 0;
+    overflow: visible;
+}
+
+.addPhoto {
+    margin-top: -35px;
+}
+
+.btn-addPhoto {
+    margin: 13px;
+}
+
+.sa {
+    top: -150px;
+    left: -50px;
+    width: 200px;
+}
+
+.sa img {
+    width: 300px!important;
+}

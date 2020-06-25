@@ -1,0 +1,73 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="secondary">
+            <ion-button [routerLink]="['/profile']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            {{ 'COURSES' | uppercase | translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding id="courses">
+    <ion-list id="courses-info">
+        <ion-item id="courses-select">
+            <ion-label>
+                {{ 'COURSES' | translate }}
+            </ion-label>
+            <ion-select [(ngModel)]="courses" [ngModelOptions]="{standalone: true}" slot="end" [interfaceOptions]="customPopoverOptions" interface="popover" id='department' (ionChange)="onSelectChange($event)">
+                <ion-select-option value="">{{ 'ALLCOURSES' | translate }}</ion-select-option>
+                <ion-select-option value="General">{{ 'GENERAL' | translate }}</ion-select-option>
+                <ion-select-option value="Information Systems">{{ 'INFORMATIONSYSTEMS' | translate }}</ion-select-option>
+                <ion-select-option value="Computer Science">{{ 'COMPUTERSCIENCE' | translate }}</ion-select-option>
+                <ion-select-option value="Internet Technology">{{ 'INTERNETTECHNOLOGY' | translate }}</ion-select-option>
+            </ion-select>
+        </ion-item>
+    </ion-list>
+    <div class="ion-padding">
+        <ngx-datatable class="material" [limit]="8" [rows]="rows" [rowHeight]="50" [columns]="columns" [columnMode]="'force'" [sortType]="'multi'" [sorts]="[{prop: 'courseCode', dir: 'desc'}]" [headerHeight]="50" [footerHeight]="50">
+            <ngx-datatable-column name="courseCode">
+                <ng-template ngx-datatable-header-template>
+                    <span>{{ 'COURSECODE' | translate }}</span>
+                </ng-template>
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    <a (click)="openCourse(row.courseCode)">{{row.courseCode}}</a>
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="courseName">
+                <ng-template ngx-datatable-header-template>
+                    <span>{{ 'NAME' | translate }}</span>
+                </ng-template>
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.courseName}}
+                </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="status">
+                <ng-template ngx-datatable-header-template>
+                    <span>{{ 'STATUS' | translate }}</span>
+                </ng-template>
+                <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.status}}
+                </ng-template>
+            </ngx-datatable-column>
+        </ngx-datatable>
+    </div>
+    <ion-row>
+        <ion-col size="6">
+            <ion-button id="courses-addCourseBtn" type="submit" expand="block" routerLink='/courses/add-course' class="ionBtn ionBtn-success" value="AddCourse">
+                <ion-icon name="add" slot="start"></ion-icon>
+                {{ 'ADDCOURSE' | translate }}
+            </ion-button>
+        </ion-col>
+        <ion-col size="6">
+            <ion-button id="courses-manageCourseBtn" type="submit" expand="block" routerLink='/courses/manage-course' class="ionBtn ionBtn-danger" value="ManageCourse">
+                <ion-icon name="create-outline" slot="start"></ion-icon>
+                {{ 'MANAGECOURSE' | translate }}
+            </ion-button>
+        </ion-col>
+    </ion-row>
+</ion-content>

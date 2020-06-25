@@ -1,0 +1,49 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="secondary">
+            <ion-button [routerLink]="['/profile']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            {{ 'HOME' | uppercase | translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding id="home">
+    <ion-card id="home-card">
+        <ion-list>
+            <ion-item color="none" id="home-list-item1">
+                <ion-avatar item-left>
+                    <img src="../../assets/img/Avatar.png" alt="">
+                </ion-avatar>
+                <h2>
+                    Ahmed Hassan
+                </h2>
+            </ion-item>
+            <ion-item id="home-list-item-container">
+                <div id="home-markdown" class="show-list-numbers-and-dots">
+                    <p>
+                        eh r2yko ygd3aan da lmfrood news feed .. lmfrood news mn lkolya y3ne wkda.. ... ay klam ay klam ay klam ay klam ay klam ay klam ay klam ay klam ay klam ay klam ay klam ay klam ay klam ay klam ay klam ay klam
+                    </p>
+                </div>
+            </ion-item>
+            <div class="spacer"></div>
+            <ion-item color="none" id="home-list-item2">
+                <ion-avatar item-left>
+                    <img src="../../assets/img/Avatar.png" alt="">
+                </ion-avatar>
+                <h2>
+                    Marwan Mostafa
+                </h2>
+            </ion-item>
+            <ion-item id="home-list-item-container">
+                <div id="home-markdown2" class="show-list-numbers-and-dots">
+                    <p>
+                        eh r2yko ygd3aan da lmfrood news feed .. lmfrood news mn lkolya y3ne wkda.. ... ay klam ay klam ay klam ay klam ay klam ay klam ay klam ay klam ay klam ay klam ay klam ay klam ay klam ay klam ay klam ay klam
+                    </p>
+                </div>
+            </ion-item>
+        </ion-list>
+    </ion-card>
+</ion-content>

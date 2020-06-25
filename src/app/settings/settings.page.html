@@ -1,0 +1,54 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            {{ 'SETTINGS' | uppercase | translate}}
+        </ion-title>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="secondary">
+            <ion-button [routerLink]="['/profile']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title></ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-list>
+        <ion-item lines="full" class="ion-activatable ion-focusable ripple-parent" detail="true" (click)="showChangeEmail()">
+            <ion-icon slot="start" name="mail-outline"></ion-icon>
+            <ion-label>
+                {{ 'CHANGEEMAIL' | translate}}
+            </ion-label>
+        </ion-item>
+        <ion-item lines="full" class="ion-activatable ion-focusable ripple-parent" detail="true" (click)="showChangePassword()">
+            <ion-icon slot="start" name="lock-closed-outline"></ion-icon>
+            <ion-label>
+                {{ 'CHANGEPASSWORD' | translate}}
+            </ion-label>
+        </ion-item>
+        <ion-item lines="full" class="ion-activatable ion-focusable ripple-parent">
+            <ion-icon slot="start" name="moon"></ion-icon>
+            <ion-label>
+                {{ 'DARKMODE' | translate}}
+            </ion-label>
+            <ion-toggle [(ngModel)]="darkMode" (ionChange)="isMode()" slot="end"></ion-toggle>
+        </ion-item>
+        <ion-item class="ion-activatable ion-focusable ripple-parent">
+            <ion-icon slot="start" name="globe-outline"></ion-icon>
+            <ion-label>{{ 'LANGUAGES' | translate}}</ion-label>
+            <ion-select okText="{{ 'OK' | translate }}" cancelText="{{ 'CANCEL' | translate }}" id="lang" [value]='ar' [(ngModel)]="selectedLanguage" (ionChange)="languageChanged()" #lang>
+                <ion-select-option value="en">{{ 'ENGLISH' | translate}}</ion-select-option>
+                <ion-select-option value="ar">{{ 'ARABIC' | translate}}</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-item lines="full" class="ion-activatable ion-focusable ripple-parent" (click)="logout()">
+            <ion-icon slot="start" name="log-out-outline"></ion-icon>
+            <ion-label>
+                {{ 'LOGOUT' | translate}}
+            </ion-label>
+        </ion-item>
+    </ion-list>
+</ion-content>

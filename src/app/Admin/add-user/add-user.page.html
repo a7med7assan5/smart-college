@@ -1,0 +1,99 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="secondary">
+            <ion-button [routerLink]="['/profile']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title>
+            {{ 'ADDUSER' | uppercase | translate}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding id="add-user">
+    <img src="../../../assets/img/Avatar.png" class="avatar mx-auto d-block" />
+    <form id="addUser-form" [formGroup]="validations_form" (ngSubmit)="addUser(id,name,email,password)">
+        <ion-list id="addUser-info">
+            <ion-item id="addUser-id">
+                <ion-label>
+                    {{ 'ID' | translate }}
+                </ion-label>
+            </ion-item>
+            <ion-item id="addUser-idInput">
+                <ion-input type="number" min="20201800" max="20301800" maxlength="8" formControlName="id" #id required></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.id">
+                    <div class="error-message" *ngIf="validations_form.get('id').hasError(validation.type) && (validations_form.get('id').dirty || validations_form.get('id').touched)">
+                        <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                    </div>
+                </ng-container>
+            </div>
+            <ion-item id="addUser-name">
+                <ion-label>
+                    {{ 'NAME' | translate }}
+                </ion-label>
+            </ion-item>
+            <ion-item id="addUser-nameInput">
+                <ion-input type="text" formControlName="name" #name required></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.name">
+                    <div class="error-message" *ngIf="validations_form.get('name').hasError(validation.type) && (validations_form.get('name').dirty || validations_form.get('name').touched)">
+                        <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                    </div>
+                </ng-container>
+            </div>
+            <ion-item id="addUser-email">
+                <ion-label>
+                    {{ 'EMAIL' | translate }}
+                </ion-label>
+            </ion-item>
+            <ion-item id="addUser-emailInput">
+                <ion-input inputmode="email" formControlName="email" #email required></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.email">
+                    <div class="error-message" *ngIf="validations_form.get('email').hasError(validation.type) && (validations_form.get('email').dirty || validations_form.get('email').touched)">
+                        <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                    </div>
+                </ng-container>
+            </div>
+            <ion-item id="addUser-password">
+                <ion-label>
+                    {{ 'PASSWORD' | translate }}
+                </ion-label>
+            </ion-item>
+            <ion-item id="addUser-passwordInput">
+                <ion-input type="text" formControlName="password" #password required></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.password">
+                    <div class="error-message" *ngIf="validations_form.get('password').hasError(validation.type) && (validations_form.get('password').dirty || validations_form.get('password').touched)">
+                        <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                    </div>
+                </ng-container>
+            </div>
+        </ion-list>
+        <ion-item id="addUser-type">
+            <ion-label>
+                {{ 'ROLE' | translate }}
+            </ion-label>
+        </ion-item>
+        <ion-item id="addUser-typeInput">
+            <ion-select [(ngModel)]="type" [ngModelOptions]="{standalone: true}" formControlName="role" class="required" slot="end" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="{{ 'SELECTROLE' | translate }}" id='role' (ionChange)="onSelectChange($event)"
+                #role aria-required="required">
+                <ion-select-option value="student">{{ 'STUDENT' | translate }}</ion-select-option>
+                <ion-select-option value="teacher">{{ 'PROFESSOR' | translate }}</ion-select-option>
+                <ion-select-option value="admin">{{ 'ADMIN' | translate }}</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-button id="addUser-addUserBtn" type="submit" expand="block" [disabled]="!validations_form.valid" class="ionBtn ionBtn-success" value="AddUser">
+            <ion-icon name="add" slot="start"></ion-icon>
+            {{ 'ADDUSER' | translate }}
+        </ion-button>
+    </form>
+</ion-content>

@@ -1,0 +1,87 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="secondary">
+            <ion-button [routerLink]="['/courses']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-title *ngIf="coursedata">
+            {{coursedata.courseName}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content padding id="course-info">
+    <h1 id="course-info-courseCode" *ngIf="coursedata">
+        {{coursedata.courseCode}}
+    </h1>
+    <ion-list id="course-info-info">
+        <ion-item id="course-info-info-name">
+            <ion-label>
+                <p>{{ 'COURSENAME' | translate }}</p>
+                <h2 *ngIf="coursedata">{{coursedata.courseName}}</h2>
+            </ion-label>
+        </ion-item>
+        <ion-item id="course-info-info-semester">
+            <ion-label>
+                <p>{{ 'SEMESTER' | translate }}</p>
+                <h2 *ngIf="coursesemesterdata">{{coursesemesterdata.semester_time}}</h2>
+            </ion-label>
+        </ion-item>
+    </ion-list>
+    <ion-item>
+        <ion-label>
+            <h1>{{ 'GRADES' | translate }}</h1>
+        </ion-label>
+    </ion-item>
+    <ngx-datatable class="material" [limit]="8" [rows]="rows" [rowHeight]="50" [columns]="columns" [columnMode]="'force'" [sortType]="'multi'" [sorts]="[{prop: 'type', dir: 'desc'}]" [headerHeight]="50" [footerHeight]="50">
+        <ngx-datatable-column name="type">
+            <ng-template ngx-datatable-header-template>
+                <span>{{ 'GRADETYPE' | translate }}</span>
+            </ng-template>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{grade.type}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="grade">
+            <ng-template ngx-datatable-header-template>
+                <span>{{ 'GRADE' | translate }}</span>
+            </ng-template>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{grade.grade}}
+            </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable>
+    <div *ngIf="coursedata">
+        <ion-row>
+            <ion-col size="6">
+                <ion-button id="courses-studentsSheetBtn" type="submit" expand="block" class="ionBtn ionBtn-success" *ngIf="coursesemesterdata" [routerLink]="['/course/semester/students-sheet']" value="studentsSheet">
+                    <ion-icon name="newspaper-outline" slot="start"></ion-icon>
+                    {{ 'STUDENTSHEET' | translate }}
+                </ion-button>
+            </ion-col>
+            <ion-col size="6">
+                <ion-button id="courses-studentsGradesBtn" type="submit" expand="block" class="ionBtn ionBtn-success" *ngIf="coursesemesterdata" [routerLink]="['/course/semester/students-grades']" value="studentsGrades">
+                    <ion-icon name="document-outline" slot="start"></ion-icon>
+                    {{ 'STUDENTGRADES' | translate }}
+                </ion-button>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col size="6">
+                <ion-button id="courses-addCourseGradeBtn" type="submit" expand="block" class="ionBtn ionBtn-update" *ngIf="coursesemesterdata" [routerLink]="['/course/semester/add-course-grade']" value="addCourseGrade">
+                    <ion-icon name="sync" slot="start"></ion-icon>
+                    {{ 'ADDCOURSEGRADE' | translate }}
+                </ion-button>
+            </ion-col>
+            <ion-col size="6">
+                <ion-button id="courses-deleteCourseGradeBtn" type="submit" expand="block" class="ionBtn ionBtn-danger" [routerLink]="['/course/semester/delete-course-grade']" value="deleteCourseGrade">
+                    <ion-icon name="trash" slot="start"></ion-icon>
+                    {{ 'DELETECOURSEGRADE' | translate }}
+                </ion-button>
+            </ion-col>
+        </ion-row>
+    </div>
+</ion-content>
