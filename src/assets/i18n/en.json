@@ -65,6 +65,7 @@
     "NAME": "Name",
     "NEW": "New",
     "NOTIFICATIONS": "Notifications",
+    "NUMBEROFSTUDENTS": "Number Of Students",
     "OK": "OK",
     "OPEN": "Open",
     "PASS": "Pass",
@@ -82,6 +83,7 @@
     "SELECTGRADETYPE": "Select Grade Type",
     "SELECTROLE": "Select Role",
     "SELECTSEMESTER": "Select Semester",
+    "SELECTTASK": "Select Task",
     "SELECTYEAR": "Select Year",
     "SEMESTER": "Semester",
     "SEMESTERSTATUS": "Semester Status",
@@ -93,6 +95,7 @@
     "STUDENTSHEET": "Student Sheet",
     "SUMMER": "Summer",
     "TABS": "Tabs",
+    "TASKS": "Tasks",
     "TEACHER": "Teacher",
     "TIME": "Time",
     "TITLE": "Title",
@@ -103,21 +106,11 @@
     "USERCOURSEINFO": "User Course Info",
     "USERCOURSES": "User Courses",
     "USERS": "Users",
+    "VIEWATTENDANCESHEET": "View Attendance Sheet",
     "VIEWCOURSES": "View Courses",
     "WEEK": "Week",
     "WINTER": "Winter",
     "YEAR": "Year",
-
-
-
-
-
-    "": "",
-    "": "",
-    "": "",
-    "": "",
-    "": "",
-    "": "",
 
 
     "": ""

@@ -38,12 +38,14 @@ export class updateStudentGradePage implements OnInit {
     private userserviceService: UserserviceService,
     private courseService: CourseService,
     private semesterserviceService: SemesterserviceService,
-    private alertservice: AlertService, private formBuilder: FormBuilder,
+    private alertservice: AlertService, 
+    private formBuilder: FormBuilder,
     private translateConfigService: TranslateConfigService,
   ) {
     this.currentClickedUser = this.userserviceService.currentClickedUserValue;
     this.currentCourse = this.courseService.currentCourseValue;
     this.currentCourseSemester = this.semesterserviceService.currentCourseSemesterValue;
+    this.selectedLanguage = this.translateConfigService.getDefaultLanguage();
   }
   sub: any;
   onSelectChange(event: any) {

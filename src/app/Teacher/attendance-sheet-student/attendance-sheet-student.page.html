@@ -13,44 +13,42 @@
         </ion-title>
     </ion-toolbar>
 </ion-header>
-<ion-content padding id="attendancesheet">
-    <div class="ion-padding">
-        <ngx-datatable class="material" *ngFor="let userdata of usertotalattendancetotal;index as i;" [limit]="8" [rows]="rows" [rowHeight]="50" [columns]="columns" [columnMode]="'force'" [sortType]="'multi'" [sorts]="[{prop: '_id', dir: 'desc'}]" [headerHeight]="50"
-            [footerHeight]="50">
-            <ngx-datatable-column name="_id">
-                <ng-template ngx-datatable-header-template>
-                    <span>{{ 'ID' | translate }}</span>
-                </ng-template>
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <a (click)="openCourse(row.courseCode)">{{row.user._id}}</a>
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="name">
-                <ng-template ngx-datatable-header-template>
-                    <span>{{ 'NAME' | translate }}</span>
-                </ng-template>
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.user.name}}
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Week {{lectures.lectureNumber}}">
-                <ng-template ngx-datatable-header-template>
-                    <span>{{ 'WEEK' | translate }} {{lectures.lectureNumber}}</span>
-                </ng-template>
-                <ng-template let-row="row" *ngFor="let fdata of things[i]" ngx-datatable-cell-template>
-                    {{row.status}}
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Total ({{lecturesnumber}})">
-                <ng-template ngx-datatable-header-template>
-                    <span>{{ 'TOTAL' | translate }} ({{lecturesnumber}})</span>
-                </ng-template>
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{row.totalattendance.totalattendance}}
-                </ng-template>
-            </ngx-datatable-column>
-        </ngx-datatable>
-    </div>
+<ion-content class="ion-padding" id="attendancesheet">
+    <ngx-datatable class="material" *ngFor="let userdata of usertotalattendancetotal;index as i;" [limit]="8" [rows]="rows" [rowHeight]="50" [columns]="columns" [columnMode]="'force'" [sortType]="'multi'" [sorts]="[{prop: '_id', dir: 'desc'}]" [headerHeight]="50"
+        [footerHeight]="50">
+        <ngx-datatable-column name="_id">
+            <ng-template ngx-datatable-header-template>
+                <span>{{ 'ID' | translate }}</span>
+            </ng-template>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <a (click)="openCourse(row.courseCode)">{{row.user._id}}</a>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="name">
+            <ng-template ngx-datatable-header-template>
+                <span>{{ 'NAME' | translate }}</span>
+            </ng-template>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.user.name}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Week {{lectures.lectureNumber}}">
+            <ng-template ngx-datatable-header-template>
+                <span>{{ 'WEEK' | translate }} {{lectures.lectureNumber}}</span>
+            </ng-template>
+            <ng-template let-row="row" *ngFor="let fdata of things[i]" ngx-datatable-cell-template>
+                {{row.status}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Total ({{lecturesnumber}})">
+            <ng-template ngx-datatable-header-template>
+                <span>{{ 'TOTAL' | translate }} ({{lecturesnumber}})</span>
+            </ng-template>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{row.totalattendance.totalattendance}}
+            </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable>
     <ion-button id="attendancesheet-attendanceReportBtn" type="submit" expand="block" *ngIf="isTeacher" [routerLink]="['/course/semester/students-attendance-report']" class="ionBtn ionBtn-success" value="attendanceReport">
         <ion-icon name="bar-chart-outline" slot="start"></ion-icon>
         {{ 'ATTENDANCEREPORT' | translate }}

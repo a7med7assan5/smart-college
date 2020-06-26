@@ -65,6 +65,7 @@
     "NAME": "الإسم",
     "NEW": "جديد",
     "NOTIFICATIONS": "الإشعارات",
+    "NUMBEROFSTUDENTS": "عدد الطلبة",
     "OK": "حسنا",
     "OPEN": "فتح",
     "PASS": "ناجح",
@@ -82,6 +83,7 @@
     "SELECTGRADETYPE": "اختار نوع الدرجة",
     "SELECTROLE": "اختار دور",
     "SELECTSEMESTER": "اختار فصل دراسي",
+    "SELECTTASK": "اختار مهمة",
     "SELECTYEAR": "اختار سنة",
     "SEMESTER": "الفصل الدراسي",
     "SEMESTERSTATUS": "حالة الفصل الدراسي",
@@ -93,6 +95,7 @@
     "STUDENTSHEET": "حضور الطلاب",
     "SUMMER": "الصيف",
     "TABS": "نوافذ التبويب",
+    "TASKS": "المهام",
     "TEACHER": "أستاذ",
     "TIME": "الوقت",
     "TITLE": "العنوان",
@@ -103,24 +106,11 @@
     "USERCOURSEINFO": "معلومات المقرر للمستخدم",
     "USERCOURSES": "مقررات المستخدم",
     "USERS": "المستخدمين",
+    "VIEWATTENDANCESHEET": "عرض ورقة الحضور",
     "VIEWCOURSES": "عرض المقررات",
     "WEEK": "الأسبوع",
     "WINTER": "الشتاء",
     "YEAR": "السنة",
-
-
-
-
-
-
-
-    "": "",
-    "": "",
-    "": "",
-    "": "",
-    "": "",
-    "": "",
-
 
 
     "": ""

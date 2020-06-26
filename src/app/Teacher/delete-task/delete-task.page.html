@@ -1,17 +1,34 @@
-<ion-header [translucent]="true">
+<ion-header>
     <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="secondary">
+            <ion-button [routerLink]="['/profile']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
         <ion-title>
-            Delete Task
+            {{ 'ADDNEWTASK' | uppercase | translate}}
         </ion-title>
     </ion-toolbar>
 </ion-header>
-
-<ion-content [fullscreen]="true">
-    <ion-header collapse="condense">
-        <ion-toolbar>
-            <ion-title size="large">Delete Task</ion-title>
-        </ion-toolbar>
-    </ion-header>
-
-    <app-explore-container name="Delete Task page"></app-explore-container>
+<ion-content class="ion-padding" id="delete-task">
+    <form id="deleteTask-form" [formGroup]="validations_form" (ngSubmit)="DeleteTask()">
+        <ion-list>
+            <ion-item id="deleteTask-select">
+                <ion-label>
+                    {{ 'TASKS' | translate }}
+                </ion-label>
+                <ion-select [(ngModel)]="task" [ngModelOptions]="{standalone: true}" slot="end" formControlName="title" [interfaceOptions]="customPopoverOptions" interface="popover" placeholder="{{ 'SELECTTASK' | translate }}" id='gradeType' (ionChange)="onSelectChange($event)"
+                    #gradeType aria-required="required">
+                    <ion-select-option *ngFor="let tasks of coursesemesterdata.tasks">{{tasks.type}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ion-list>
+        <ion-button id="deleteTask-deleteTaskBtn" type="submit" expand="block" [disabled]="!validations_form.valid" class="ionBtn ionBtn-danger" value="deleteTask">
+            <ion-icon name="trash" slot="start"></ion-icon>
+            {{ 'DELETETASK' | translate }}
+        </ion-button>
+    </form>
 </ion-content>

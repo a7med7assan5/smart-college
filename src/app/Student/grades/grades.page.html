@@ -13,41 +13,39 @@
         </ion-title>
     </ion-toolbar>
 </ion-header>
-<ion-content padding id="grades">
-    <div class="ion-padding">
-        <ngx-datatable class="material" [limit]="8" [rows]="rows" [rowHeight]="50" [columns]="columns" [columnMode]="'force'" [sortType]="'multi'" [sorts]="[{prop: '_id', dir: 'desc'}]" [headerHeight]="50" [footerHeight]="50">
-            <ngx-datatable-column name="_id" *ngFor="let userdata of usertotalgradestotal;index as i;">
-                <ng-template ngx-datatable-header-template>
-                    <span>{{ 'ID' | translate }}</span>
-                </ng-template>
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    <a>{{userdata.row._id}}</a>
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="name">
-                <ng-template ngx-datatable-header-template>
-                    <span>{{ 'NAME' | translate }}</span>
-                </ng-template>
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{userdata.row.name}}
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="{{grades.type}}({{grades.grade}})">
-                <ng-template *ngFor="let grades of coursedata" ngx-datatable-header-template>
-                    <span>{{grades.type}}({{grades.grade}})</span>
-                </ng-template>
-                <ng-template let-row="row" *ngFor="let fdata of things[i]" ngx-datatable-cell-template>
-                    {{fdata.score}}
-                </ng-template>
-            </ngx-datatable-column>
-            <ngx-datatable-column name="Total({{courseTotalGrades.totalGrades}})">
-                <ng-template *ngIf="courseTotalGrades" ngx-datatable-header-template>
-                    <span>Total({{courseTotalGrades.totalGrades}})</span>
-                </ng-template>
-                <ng-template let-row="row" ngx-datatable-cell-template>
-                    {{userdata.totalGrades.totalGrades}}
-                </ng-template>
-            </ngx-datatable-column>
-        </ngx-datatable>
-    </div>
+<ion-content class="ion-padding" id="grades">
+    <ngx-datatable class="material" [limit]="8" [rows]="rows" [rowHeight]="50" [columns]="columns" [columnMode]="'force'" [sortType]="'multi'" [sorts]="[{prop: '_id', dir: 'desc'}]" [headerHeight]="50" [footerHeight]="50">
+        <ngx-datatable-column name="_id" *ngFor="let userdata of usertotalgradestotal;index as i;">
+            <ng-template ngx-datatable-header-template>
+                <span>{{ 'ID' | translate }}</span>
+            </ng-template>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                <a>{{userdata.row._id}}</a>
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="name">
+            <ng-template ngx-datatable-header-template>
+                <span>{{ 'NAME' | translate }}</span>
+            </ng-template>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{userdata.row.name}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="{{grades.type}}({{grades.grade}})">
+            <ng-template *ngFor="let grades of coursedata" ngx-datatable-header-template>
+                <span>{{grades.type}}({{grades.grade}})</span>
+            </ng-template>
+            <ng-template let-row="row" *ngFor="let fdata of things[i]" ngx-datatable-cell-template>
+                {{fdata.score}}
+            </ng-template>
+        </ngx-datatable-column>
+        <ngx-datatable-column name="Total({{courseTotalGrades.totalGrades}})">
+            <ng-template *ngIf="courseTotalGrades" ngx-datatable-header-template>
+                <span>Total({{courseTotalGrades.totalGrades}})</span>
+            </ng-template>
+            <ng-template let-row="row" ngx-datatable-cell-template>
+                {{userdata.totalGrades.totalGrades}}
+            </ng-template>
+        </ngx-datatable-column>
+    </ngx-datatable>
 </ion-content>

@@ -13,7 +13,15 @@
         </ion-title>
     </ion-toolbar>
 </ion-header>
-<ion-content padding id="assignments">
+<ion-content class="ion-padding" id="assignments">
+    <ion-list>
+        <ion-item *ngIf="coursesdata">
+            <h1>{{coursesdata.courseName}}</h1>
+        </ion-item>
+        <ion-item *ngIf="coursesemesterdata">
+            <h2> {{coursesemesterdata.semester_time}} </h2>
+        </ion-item>
+    </ion-list>
     <div *ngIf='coursesdata'>
         <ion-card *ngFor="let tasks of coursesemesterdata">
             <ion-list>

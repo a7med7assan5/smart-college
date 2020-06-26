@@ -1,17 +1,56 @@
-<ion-header [translucent]="true">
+<ion-header>
     <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="secondary">
+            <ion-button [routerLink]="['/profile']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
         <ion-title>
-            Attendance - Teacher
+            {{ 'ATTENDANCE' | uppercase | translate}}
         </ion-title>
     </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-    <ion-header collapse="condense">
-        <ion-toolbar>
-            <ion-title size="large">Attendance - Teacher</ion-title>
-        </ion-toolbar>
-    </ion-header>
+<ion-content class="ion-padding" id="attendance-teacher">
+    <ion-list>
+        <ion-item *ngIf="coursesdata">
+            <h1>{{coursesdata.courseName}}</h1>
+        </ion-item>
+        <ion-item *ngIf="coursesemesterdata">
+            <h2> {{coursesemesterdata.semester_time}} </h2>
+        </ion-item>
+    </ion-list>
+    <ion-row>
+        <ion-col size="6">
+            <ion-button type="submit" expand="block" *ngIf="isTeacher" [routerLink]="['/course/semester/add-lecture']" class="ionBtn ionBtn-success" value="AddNewLecture">
+                <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+                {{ 'ADDNEWLECTURE' | translate }}
+            </ion-button>
+        </ion-col>
+        <ion-col size="6">
+            <ion-button type="submit" expand="block" *ngIf="isTeacher" [routerLink]="['/course/semester/students-attendance-sheet']" class="ionBtn ionBtn-update" value="viewAttendanceSheet">
+                <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+                {{ 'VIEWATTENDANCESHEET' | translate }}
+            </ion-button>
+        </ion-col>
+    </ion-row>
+    <br>
+    <ion-row>
+        <ion-col size="6">
+            <ion-button type="submit" expand="block" *ngIf="isStudent" [routerLink]="['/course/semester/attend-me']" class="ionBtn ionBtn-success" value="attendMe">
+                <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+                {{ 'ATTENDME' | translate }}
+            </ion-button>
+        </ion-col>
+        <ion-col size="6">
+            <ion-button type="submit" expand="block" *ngIf="isStudent" [routerLink]="['/course/semester/attendance-sheet']" class="ionBtn ionBtn-update" value="viewAttendanceSheet">
+                <ion-icon name="arrow-forward-outline" slot="end"></ion-icon>
+                {{ 'VIEWATTENDANCESHEET' | translate }}
+            </ion-button>
+        </ion-col>
+    </ion-row>
 
-    <app-explore-container name="Attendance - Teacher page"></app-explore-container>
 </ion-content>
