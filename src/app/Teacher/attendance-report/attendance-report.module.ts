@@ -5,13 +5,15 @@ import { FormsModule } from '@angular/forms';
 import { attendanceReportPage } from './attendance-report.page';
 
 import { attendanceReportPageRoutingModule } from './attendance-report-routing.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    attendanceReportPageRoutingModule
+    attendanceReportPageRoutingModule,
+    TranslateModule.forChild()
   ],
   declarations: [attendanceReportPage]
 })

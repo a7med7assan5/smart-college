@@ -18,10 +18,6 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: [Role.Admin, Role.Teacher, Role.Student] }
   },
-  // {
-  //   path: 'courses',
-  //   loadChildren: () => import('./Student/courses/courses.module').then(m => m.coursesPageModule)
-  // },
   {
     path: 'messages',
     loadChildren: () => import('./messages/messages.module').then( m => m.messagesPageModule),
@@ -163,7 +159,7 @@ const routes: Routes = [
 
   // Student
   {
-    path: 'courses',
+    path: 'mycourses',
     loadChildren: () => import('./Student/courses/courses.module').then(m => m.coursesPageModule),
     canActivate: [AuthGuard],
     data: { roles: [Role.Teacher, Role.Student] }
@@ -263,7 +259,7 @@ const routes: Routes = [
     path: 'course/semester/assignments',
     loadChildren: () => import('./Teacher/assignments/assignments.module').then(m => m.assignmentsPageModule),
     canActivate: [AuthGuard],
-    data: { roles: [Role.Teacher, Role.Student, Role.Admin] }
+    data: { roles: [Role.Teacher, Role.Student] }
   },
   {
     path: 'course/semester/add-task',

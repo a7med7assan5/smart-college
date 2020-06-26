@@ -36,4 +36,18 @@
             </ion-list>
         </ion-card>
     </div>
+    <ion-row>
+        <ion-col size="6">
+            <ion-button id="assignments-addTaskBtn" type="submit" expand="block" *ngIf="isTeacher" [routerLink]="['/course/semester/add-task']" class="ionBtn ionBtn-success" value="addTask">
+                <ion-icon name="add" slot="start"></ion-icon>
+                {{ 'ADDTASK' | translate }}
+            </ion-button>
+        </ion-col>
+        <ion-col size="6">
+            <ion-button id="assignments-deleteTaskBtn" type="submit" expand="block" **ngIf="isTeacher" [routerLink]="['/course/semester/delete-task']" class="ionBtn ionBtn-success" value="deleteTask">
+                <ion-icon name="trash" slot="start"></ion-icon>
+                {{ 'DELETETASK' | translate }}
+            </ion-button>
+        </ion-col>
+    </ion-row>
 </ion-content>

@@ -34,7 +34,10 @@ export class AppComponent implements OnInit {
  });
   }
 
-  
+  get isUser() {
+    return this.currentUser && (this.currentUser.role === Role.Admin || this.currentUser.role === Role.Teacher || this.currentUser.role === Role.Student);
+
+  }
 
   get isAdmin() {
     return this.currentUser && this.currentUser.role === Role.Admin;
@@ -42,6 +45,15 @@ export class AppComponent implements OnInit {
   get isStudent() {
     return this.currentUser && this.currentUser.role === Role.Student;
   }
+
+  get isTeacher() {
+    return this.currentUser && this.currentUser.role === Role.Teacher;
+  }
+
+  get isTeacherOrStudent() {
+    return this.currentUser && (this.currentUser.role === Role.Teacher || this.currentUser.role === Role.Student);
+  }
+
   logout() {
     this.authenticationService.logout();
     this.router.navigate(['/login']);

@@ -103,9 +103,21 @@
     "BEACONID": "Beacon ID",
     "TITLE": "Title",
     "LINK": "Link",
+    "ATTENDANCEREPORT": "Attendance Report",
+    "GRADESREPORT": "Grades Report",
+    "ADDTASK": "Add Task",
+    "DELETETASK": "Delete Task",
+
+
     "": "",
     "": "",
     "": "",
+    "": "",
+    "": "",
+    "": "",
+    "": "",
+    "": "",
+
 
     "": ""
 }
