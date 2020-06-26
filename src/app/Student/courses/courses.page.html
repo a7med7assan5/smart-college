@@ -28,36 +28,36 @@
             </ion-select>
         </ion-item>
     </ion-list>
-    <ion-card id="student-courses-card" *ngFor='let course of arr' (focus)="closCourse();closSemester()">
+    <ion-card *ngFor='let course of arr' (focus)="closCourse();closSemester()">
         <ion-list>
-            <ion-item color="none" id="student-courses-name">
+            <ion-item color="none">
                 {{course.courseName}}
             </ion-item>
-            <ion-item id="student-courses-courseCode">
-                <div id="student-courses-markdown" class="show-list-numbers-and-dots">
+            <ion-item>
+                <div class="show-list-numbers-and-dots">
                     <p>
                         {{ 'COURSECODE' | translate}}:
                         <strong> {{course.courseCode}} </strong>
                     </p>
                 </div>
             </ion-item>
-            <ion-item id="student-courses-courseStatus">
-                <div id="student-courses-markdown" class="show-list-numbers-and-dots">
+            <ion-item>
+                <div class="show-list-numbers-and-dots">
                     <p>
                         {{ 'COURSESTATUS' | translate}}:
                         <strong> {{course.status}} </strong>
                     </p>
                 </div>
             </ion-item>
-            <ion-item id="student-courses-semesterStatus">
-                <div id="student-courses-markdown" class="show-list-numbers-and-dots">
+            <ion-item>
+                <div class="show-list-numbers-and-dots">
                     <p>
                         {{ 'SEMESTERSTATUS' | translate}}:
                         <strong> {{course.semesters[0].semester_status}} </strong>
                     </p>
                 </div>
             </ion-item>
-            <ion-item color="positive" id="student-courses-list-open" (focus)="openCourse(course.courseCode);openSemester(course.courseCode,course.semester_time)" [routerLink]="['/course/semester/home']">
+            <ion-item color="positive" (focus)="openCourse(course.courseCode);openSemester(course.courseCode,course.semester_time)" [routerLink]="['/course/semester/home']">
                 <ion-icon name="open" item-left></ion-icon>
                 {{ 'OPEN' | translate}}
             </ion-item>

@@ -6,6 +6,9 @@ import { AuthService } from 'src/app/services/auth.service';
 import { TeacherServiceService } from 'src/app/services/teacher-service.service';
 import { CourseService } from 'src/app/services/course.service';
 import { SemesterserviceService } from 'src/app/services/semesterservice.service';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { AlertService } from 'src/app/services/alert.service';
+import { TranslateConfigService } from 'src/app/services/translate-config.service';
 
 @Component({
   selector: 'app-add-lecture',
@@ -22,11 +25,8 @@ export class addLecturePage implements OnInit {
   lectureNumber: string;
   lectureLocation: string;
   beaconId: string;
-  response: any;
-  error: any;
-  response2: any;
-  error2: any;
-
+  selectedLanguage:string;
+  validations_form: FormGroup;
 
   constructor(
     private router: Router,
@@ -34,13 +34,17 @@ export class addLecturePage implements OnInit {
     private teacherservices: TeacherServiceService,
     private _Activatedroute: ActivatedRoute,
     private courseService: CourseService,
-    private semesterserviceService: SemesterserviceService
+    private semesterserviceService: SemesterserviceService,
+    private alertservice: AlertService, 
+    private formBuilder: FormBuilder,
+    private translateConfigService: TranslateConfigService,
 
   ) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
     this.currentUser = this.authenticationService.currentUserValue;
     this.currentCourse = this.courseService.currentCourseValue;
     this.currentCourseSemester = this.semesterserviceService.currentCourseSemesterValue;
+    this.selectedLanguage = this.translateConfigService.getDefaultLanguage();
   }
   get isStudent() {
     return this.currentUser && this.currentUser.role === Role.Student;
@@ -57,36 +61,52 @@ export class addLecturePage implements OnInit {
     let response = document.getElementById('response');
     let error = document.getElementById('error');
     this.teacherservices.addCourseSemesterLecture(this.currentCourse.courseCode, this.currentCourseSemester.semesters[0].semester_time, this.lectureNumber, this.lectureLocation, this.beaconId).subscribe(res => {
-      this.response = res;
-      this.teacherservices.addCourseSemesterAttendance(this.currentCourse.courseCode, this.currentCourseSemester.semesters[0].semester_time, this.lectureNumber, this.beaconId).subscribe(res => {
-        this.response2 = res;
-      }, err => {
-        this.error2 = err.error;
-      }
-      );
-      if (error.classList.contains('d-block')) {
-        error.classList.replace('d-block', 'd-none');
-      }
-      response.classList.replace('d-none', 'd-block');
-      response.innerHTML = this.response.msg;
-
+      this.alertservice.showAlert("&#xE876;", "success", res.msg);
       lectureNumber.value = "";
       lectureLocation.value = "";
       beaconId.value = "";
-    }, err => {
-      this.error = err.error;
-      if (response.classList.contains('d-block')) {
-        response.classList.replace('d-block', 'd-none');
-      }
-      error.classList.replace('d-none', 'd-block');
-      error.innerHTML = this.error.msg;
+      this.navigateTo();
+      }, err => {
+        this.alertservice.showAlert("&#xE5CD;", "error", err.error.msg);
     }
     );
   }
 
+  navigateTo(){
+    this.router.navigate(['/courses']);
+  }
+
+  languageChanged(){
+    this.translateConfigService.setLanguage(this.selectedLanguage);
+  }
+
   ngOnInit(): void {
-
-
+    this.validations_form = this.formBuilder.group({
+      lectureNumber: new FormControl('', Validators.compose([
+        Validators.max(12),
+        Validators.min(1),
+        Validators.required,
+      ])),
+      location: new FormControl('', Validators.required),
+      beaconid: new FormControl('', Validators.required),
+    });
 
   }
+
+  validation_messages = {
+    'lectureNumber': [
+      { type: 'min', message: 'Lecture Number must be at least 1.' },
+      { type: 'max', message: 'Lecture Number cannot be more than 12.' },
+      { type: 'required', message: 'Lecture Number is required.' },
+    ],
+    'location': [
+      { type: 'required', message: 'Location is required.' }
+    ],
+    'beaconid': [
+      { type: 'required', message: 'Beacon ID is required.' }
+    ]
+
+  };
+
+
 }

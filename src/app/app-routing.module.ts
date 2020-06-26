@@ -263,7 +263,7 @@ const routes: Routes = [
     path: 'course/semester/assignments',
     loadChildren: () => import('./Teacher/assignments/assignments.module').then(m => m.assignmentsPageModule),
     canActivate: [AuthGuard],
-    data: { roles: [Role.Teacher, Role.Student] }
+    data: { roles: [Role.Teacher, Role.Student, Role.Admin] }
   },
   {
     path: 'course/semester/add-task',

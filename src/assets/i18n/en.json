@@ -96,11 +96,16 @@
     "LOCATION": "Location",
     "ATTENDME": "Attend Me",
     "COURSESTATUS": "Course Status",
-    "ASSIGNMENTS": "",
+    "ASSIGNMENTS": "Assignments",
+    "ADDNEWLECTURE": "Add New Lecture",
+    "LECTURE": "Lecture",
+    "ADDNEWTASK": "Add New Task",
+    "BEACONID": "Beacon ID",
+    "TITLE": "Title",
+    "LINK": "Link",
     "": "",
     "": "",
     "": "",
-
 
     "": ""
 }

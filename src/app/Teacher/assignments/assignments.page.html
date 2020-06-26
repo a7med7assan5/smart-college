@@ -1,29 +1,39 @@
 <ion-header>
-    <ion-navbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="secondary">
+            <ion-button [routerLink]="['/profile']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
         <ion-title>
-            Assignments
+            {{ 'ASSIGNMENTS' | uppercase | translate}}
         </ion-title>
-    </ion-navbar>
+    </ion-toolbar>
 </ion-header>
 <ion-content padding id="assignments">
-    <ion-card id="assignments-card1">
-        <ion-list>
-            <ion-item color="none" id="assignments-list-item70">
-                Title
-            </ion-item>
-            <ion-item id="assignments-list-item-container16">
-                <div id="assignments-markdown25" class="show-list-numbers-and-dots">
-                    <p style="margin-top:0px;color:#000000;">
-                        <strong>
-                www.link.com/assignment#1
-              </strong>
-                    </p>
-                </div>
-            </ion-item>
-            <ion-item color="positive" id="assignments-list-item71">
-                <ion-icon name="open" item-left></ion-icon>
-                Open
-            </ion-item>
-        </ion-list>
-    </ion-card>
+    <div *ngIf='coursesdata'>
+        <ion-card *ngFor="let tasks of coursesemesterdata">
+            <ion-list>
+                <ion-item color="none">
+                    {{tasks.type}}
+                </ion-item>
+                <ion-item>
+                    <div class="show-list-numbers-and-dots">
+                        <p style="margin-top:0px;color:#000000;">
+                            <strong>
+                            <a href="{{tasks.path}}" target="_blank">{{tasks.path}}</a>
+                            </strong>
+                        </p>
+                    </div>
+                </ion-item>
+                <ion-item color="positive">
+                    <ion-icon name="open" slot="start"></ion-icon>
+                    {{ 'OPEN' | translate}}
+                </ion-item>
+            </ion-list>
+        </ion-card>
+    </div>
 </ion-content>

@@ -1,35 +1,70 @@
 <ion-header>
-    <ion-navbar>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button defaultHref="home"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="secondary">
+            <ion-button [routerLink]="['/profile']">
+                <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+            </ion-button>
+        </ion-buttons>
         <ion-title>
-            Create New Lecture
+            {{ 'ADDNEWLECTURE' | uppercase | translate}}
         </ion-title>
-    </ion-navbar>
+    </ion-toolbar>
 </ion-header>
 <ion-content padding id="add-lecture">
-    <form id="addLecture-form">
-        <ion-item id="addLecture-courseCode">
-            <ion-label>
-                Course Code:
-            </ion-label>
-            <ion-input type="text" placeholder=""></ion-input>
-        </ion-item>
-        <div class="spacer"></div>
-        <ion-item id="addLecture-week">
-            <ion-label>
-                Week:
-            </ion-label>
-            <ion-input type="text" placeholder=""></ion-input>
-        </ion-item>
-        <div class="spacer"></div>
-        <ion-item id="addLecture-hall">
-            <ion-label>
-                Hall:
-            </ion-label>
-            <ion-input type="text" placeholder=""></ion-input>
-        </ion-item>
+    <form id="addLecture-form" [formGroup]="validations_form" (ngSubmit)="AddLeacture(lectureNumber,lectureLocation,beaconId)">
+        <ion-list>
+            <ion-item id="addLecture-lecture">
+                <ion-label>
+                    {{ 'LECTURE' | translate}} #
+                </ion-label>
+            </ion-item>
+            <ion-item id="addLecture-lectureInput">
+                <ion-input type="number" min="1" max="12" formControlName="lectureNumber" placeholder="Enter Lecture Number" #lectureNumber required></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.lectureNumber">
+                    <div class="error-message" *ngIf="validations_form.get('lectureNumber').hasError(validation.type) && (validations_form.get('lectureNumber').dirty || validations_form.get('lectureNumber').touched)">
+                        <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                    </div>
+                </ng-container>
+            </div>
+            <ion-item id="addLecture-location">
+                <ion-label>
+                    {{ 'LOCATION' | translate}}
+                </ion-label>
+            </ion-item>
+            <ion-item id="addLecture-locationInput">
+                <ion-input type="text" formControlName="location" placeholder="Enter Lecture Location" #lectureLocation required></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.location">
+                    <div class="error-message" *ngIf="validations_form.get('location').hasError(validation.type) && (validations_form.get('location').dirty || validations_form.get('location').touched)">
+                        <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                    </div>
+                </ng-container>
+            </div>
+            <ion-item id="addLecture-hall">
+                <ion-label>
+                    {{ 'BEACONID' | translate}}
+                </ion-label>
+            </ion-item>
+            <ion-item id="addLecture-hallInput">
+                <ion-input type="text" formControlName="beaconid" placeholder="Beacon ID:" #beaconId required></ion-input>
+            </ion-item>
+            <div class="validation-errors">
+                <ng-container *ngFor="let validation of validation_messages.beaconid">
+                    <div class="error-message" *ngIf="validations_form.get('beaconid').hasError(validation.type) && (validations_form.get('beaconid').dirty || validations_form.get('beaconid').touched)">
+                        <ion-icon name="information-circle-outline"></ion-icon> {{ validation.message }}
+                    </div>
+                </ng-container>
+            </div>
+        </ion-list>
+        <ion-button id="addLecture-addNewLectureBtn" type="submit" expand="block" [disabled]="!validations_form.valid" class="ionBtn ionBtn-success" value="AddNewLecture">
+            <ion-icon name="add" slot="start"></ion-icon>
+            {{ 'ADDNEWLECTURE' | translate }}
+        </ion-button>
     </form>
-    <ion-button id="addLecture-createNewLectureBtn" outline color="balanced" block icon-left>
-        <ion-icon name="create"></ion-icon>
-        Create New Lecture
-    </ion-button>
 </ion-content>

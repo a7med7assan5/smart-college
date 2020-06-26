@@ -1,11 +1,12 @@
 import { IonicModule } from '@ionic/angular';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { addTaskPage } from './add-task.page';
 import { ExploreContainerComponentModule } from '../../explore-container/explore-container.module';
 
 import { addTaskPageRoutingModule } from './add-task-routing.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
@@ -13,7 +14,9 @@ import { addTaskPageRoutingModule } from './add-task-routing.module';
     CommonModule,
     FormsModule,
     ExploreContainerComponentModule,
-    addTaskPageRoutingModule
+    addTaskPageRoutingModule,
+    ReactiveFormsModule,
+    TranslateModule.forChild()
   ],
   declarations: [addTaskPage]
 })

@@ -99,11 +99,17 @@
     "LOCATION": "المكان",
     "ATTENDME": "تسجيل الحضور",
     "COURSESTATUS": "حالة المقرر",
-    "ASSIGNMENTS": "",
+    "ASSIGNMENTS": "المهام",
+    "ADDNEWLECTURE": "إضافة محاضرة جديدة",
+    "LECTURE": "المحاضرة",
+    "ADDNEWTASK": "إضافة مهمة جديدة",
+    "BEACONID": "البيكون",
+    "TITLE": "العنوان",
+    "LINK": "الرابط",
     "": "",
     "": "",
     "": "",
-
+    "": "",
 
 
 

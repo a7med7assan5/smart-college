@@ -5,13 +5,15 @@ import { FormsModule } from '@angular/forms';
 import { assignmentsPage } from './assignments.page';
 
 import { assignmentsPageRoutingModule } from './assignments-routing.module';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    assignmentsPageRoutingModule
+    assignmentsPageRoutingModule,
+    TranslateModule.forChild()
   ],
   declarations: [assignmentsPage]
 })
