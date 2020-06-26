@@ -277,7 +277,7 @@ const routes: Routes = [
     path: 'course/semester/students-attendance-sheet',
     loadChildren: () => import('./Teacher/attendance-sheet-student/attendance-sheet-student.module').then(m => m.teacherAttendanceSheetStudentPageModule),
     canActivate: [AuthGuard],
-    data: { roles: [Role.Teacher] }
+    data: { roles: [Role.Teacher, Role.Admin] }
   },
   {
     path: 'course/semester/students-attendance-report',

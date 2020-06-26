@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { User, Role, Semester } from 'src/app/_models';
 import { Course } from 'src/app/_models/course';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -6,11 +6,15 @@ import { AuthService } from 'src/app/services/auth.service';
 import { TeacherServiceService } from 'src/app/services/teacher-service.service';
 import { CourseService } from 'src/app/services/course.service';
 import { SemesterserviceService } from 'src/app/services/semesterservice.service';
+import { TranslateConfigService } from 'src/app/services/translate-config.service';
+import { HttpClient } from '@angular/common/http';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-attendance-sheet-student',
   templateUrl: 'attendance-sheet-student.page.html',
-  styleUrls: ['attendance-sheet-student.page.scss']
+  styleUrls: ['attendance-sheet-student.page.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class teacherAttendanceSheetStudentPage implements OnInit {
   currentUser: User;
@@ -39,7 +43,9 @@ export class teacherAttendanceSheetStudentPage implements OnInit {
   usertotalattendance: any;
   usertotalattendancetotal: Array<object> = [];
   coursesdata: any;
-
+  selectedLanguage:string;
+  public columns: any;
+  public rows: any;
 
 
   constructor(
@@ -48,7 +54,9 @@ export class teacherAttendanceSheetStudentPage implements OnInit {
     private teacherservices: TeacherServiceService,
     private _Activatedroute: ActivatedRoute,
     private courseService: CourseService,
-    private semesterserviceService: SemesterserviceService
+    private semesterserviceService: SemesterserviceService,
+    private translateConfigService: TranslateConfigService,
+    private http: HttpClient, public navCtrl: NavController
 
   ) {
     this.authenticationService.currentUser.subscribe(x => this.currentUser = x);
@@ -56,6 +64,13 @@ export class teacherAttendanceSheetStudentPage implements OnInit {
     this.currentCourse = this.courseService.currentCourseValue;
     this.currentCourseSemester = this.semesterserviceService.currentCourseSemesterValue;
     this.things = [];
+    this.selectedLanguage = this.translateConfigService.getDefaultLanguage();
+    this.columns = [
+      { name: '_id' },
+      { name: 'name' },
+      { name: 'Week {{lectures.lectureNumber}}' },
+      { name: 'Total ({{lecturesnumber}})' }
+    ];
   }
   get isStudent() {
     return this.currentUser && this.currentUser.role === Role.Student;
@@ -140,6 +155,11 @@ export class teacherAttendanceSheetStudentPage implements OnInit {
     }, err => {
       this.coursedata = err
     });
+  }
+
+  
+  languageChanged(){
+    this.translateConfigService.setLanguage(this.selectedLanguage);
   }
 
   ngOnInit(): void {
