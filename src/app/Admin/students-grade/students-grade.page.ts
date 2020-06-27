@@ -9,12 +9,15 @@ import { SemesterserviceService } from 'src/app/services/semesterservice.service
 import { TranslateConfigService } from 'src/app/services/translate-config.service';
 import { HttpClient } from '@angular/common/http';
 import { NavController } from '@ionic/angular';
+import * as $ from 'jquery';
+import * as dt from 'datatables.net';
 
 @Component({
   selector: 'app-students-grade',
   templateUrl: 'students-grade.page.html',
   styleUrls: ['students-grade.page.scss']
 })
+
 export class studentsGradePage implements OnInit {
   currentClickedUser: User;
   currentCourse: Course;
@@ -49,7 +52,7 @@ export class studentsGradePage implements OnInit {
     private courseService: CourseService,
     private semesterserviceService: SemesterserviceService,
     private translateConfigService: TranslateConfigService,
-    private http: HttpClient, public navCtrl: NavController
+    private http: HttpClient, public navCtrl: NavController,
   ) {
     this.currentClickedUser = this.userserviceService.currentClickedUserValue;
     this.currentCourse = this.courseService.currentCourseValue;
@@ -62,6 +65,7 @@ export class studentsGradePage implements OnInit {
       { name: '{{grades.type}}({{grades.grade}})' },
       { name: 'Total({{courseTotalGrades.totalGrades}})' }
     ];
+    
   }
 
   sub: any;
@@ -92,41 +96,44 @@ export class studentsGradePage implements OnInit {
   }
 
   ngOnInit(): void {
+    $(document).ready( function () {
+      dt.$('#table_id').DataTable();
+  } );
 
-    this.adminservices.totalCourseSemesterGrades(this.currentCourse.courseCode, this.currentCourseSemester.semesters[0].semester_time).subscribe(res => {
-      this.courseTotalGrades = res
-      this.rows = res;
-    }, err => {
-      this.courseTotalGrades = err
-      this.rows = err;
-    });
-    this.adminservices.getCourseSemesterStudentsSheet(this.currentCourse.courseCode, this.currentCourseSemester.semesters[0].semester_time).subscribe(res => {
-      this.courseusers = res;
-      this.rows = res;
-      for (let y = 0; y < this.courseusers.length; y++) {
-        this.adminservices.profile(this.courseusers[y]._id).subscribe(res => {
-          this.userdata = res
-          this.rows = res;
-          this.adminservices.semesterStudentTotalGrades(this.courseusers[y]._id, this.currentCourse.courseCode, this.currentCourseSemester.semesters[0].semester_time).subscribe(res => {
-            this.usertotalgrades = res
-            this.usertotalgradestotal[y] = this.usertotalgrades;
-          }, err => {
-            this.usertotalgrades = err
-            this.rows = err;
-          });
+  //   this.adminservices.totalCourseSemesterGrades(this.currentCourse.courseCode, this.currentCourseSemester.semesters[0].semester_time).subscribe(res => {
+  //     this.courseTotalGrades = res
+  //     this.rows = res;
+  //   }, err => {
+  //     this.courseTotalGrades = err
+  //     this.rows = err;
+  //   });
+  //   this.adminservices.getCourseSemesterStudentsSheet(this.currentCourse.courseCode, this.currentCourseSemester.semesters[0].semester_time).subscribe(res => {
+  //     this.courseusers = res;
+  //     this.rows = res;
+  //     for (let y = 0; y < this.courseusers.length; y++) {
+  //       this.adminservices.profile(this.courseusers[y]._id).subscribe(res => {
+  //         this.userdata = res
+  //         this.rows = res;
+  //         this.adminservices.semesterStudentTotalGrades(this.courseusers[y]._id, this.currentCourse.courseCode, this.currentCourseSemester.semesters[0].semester_time).subscribe(res => {
+  //           this.usertotalgrades = res
+  //           this.usertotalgradestotal[y] = this.usertotalgrades;
+  //         }, err => {
+  //           this.usertotalgrades = err
+  //           this.rows = err;
+  //         });
 
-          this.arrayofusersdata[y] = this.userdata;
-          this.things[y] = [];
-          this.getcoursedata(this.userdata._id, y);
-        }, err => {
-          this.userdata = err
-          this.rows = err;
-        });
+  //         this.arrayofusersdata[y] = this.userdata;
+  //         this.things[y] = [];
+  //         this.getcoursedata(this.userdata._id, y);
+  //       }, err => {
+  //         this.userdata = err
+  //         this.rows = err;
+  //       });
 
-      }
-    }, err => {
-      this.courseusers = err;
-      this.rows = err;
-    });
+  //     }
+  //   }, err => {
+  //     this.courseusers = err;
+  //     this.rows = err;
+  //   });
   }
 }

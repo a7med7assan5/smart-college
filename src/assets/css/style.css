@@ -904,11 +904,11 @@ figure figcaption {
 }
 
 
-/* #Table */
+/* #Table
 
 td {
     padding: 5px;
-}
+} */
 
 
 /* Grades single */
@@ -964,7 +964,8 @@ td {
     padding: 0px!important;
 }
 
-.table td a {
+
+/* .table td a {
     cursor: pointer;
     display: inline-block;
     margin: 0 5px;
@@ -1007,7 +1008,7 @@ td {
 
 .table td .add {
     display: none;
-}
+} */
 
 .manage-btns {
     width: 1500px;
