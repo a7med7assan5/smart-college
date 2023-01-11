@@ -71,7 +71,7 @@
         "ionic-angular": "3.9.10",
         "ionicons": "5.0.1",
         "jquery": "^3.5.1",
-        "jsonwebtoken": "^8.5.1",
+        "jsonwebtoken": "^9.0.0",
         "kill-port": "^1.6.0",
         "mongoose": "^5.9.7",
         "nodemo": "^1.0.0",
